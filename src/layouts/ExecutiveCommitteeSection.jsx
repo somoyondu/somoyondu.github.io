@@ -2,6 +2,12 @@ import React from 'react'
 import ExecutiveCommittee from '../features/ExecutiveCommittee'
 
 const ExecutiveCommitteeSection = () => {
+  const executiveCommitteeIn2026 = {
+    title: 'কার্যনির্বাহী পরিষদ ২০২৬',
+    expandButtonText: '২০২৬ এর পূর্ণাঙ্গ কার্যনির্বাহী পরিষদ দেখুন',
+    collapseButtonText: '২০২৬ এর সংক্ষিপ্ত কমিটি দেখুন',
+    year: 2026
+  };
   const executiveCommitteeIn2025 = {
     title: 'কার্যনির্বাহী পরিষদ ২০২৫',
     expandButtonText: '২০২৫ এর পূর্ণাঙ্গ কার্যনির্বাহী পরিষদ দেখুন',
@@ -21,6 +27,7 @@ const ExecutiveCommitteeSection = () => {
     year: 2023
   };
   const executiveCommitteeByYearMap = {
+    2026: executiveCommitteeIn2026,
     2025: executiveCommitteeIn2025,
     2024: executiveCommitteeIn2024,
     2023: executiveCommitteeIn2023,
@@ -28,6 +35,9 @@ const ExecutiveCommitteeSection = () => {
 
   return (
     <div>
+      <ExecutiveCommittee
+        executiveCommitteeInfo={executiveCommitteeByYearMap[2026]}
+      />
       <ExecutiveCommittee
         executiveCommitteeInfo={executiveCommitteeByYearMap[2025]}
       />
