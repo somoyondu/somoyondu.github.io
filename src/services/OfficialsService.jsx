@@ -8,7 +8,7 @@ const OfficialsService = (year) => {
     {
       name: "শ্রেয়া শর্বজয়া",
       designation: "উপ-কোষাধ্যক্ষ",
-      image: "committee-members/2026/deputy-treasurer/shreya.jpg",
+      image: "committee-members/2026/treasurer/shreya.jpg",
     },
     {
       name: "তাওয়াসুম",
@@ -18,7 +18,7 @@ const OfficialsService = (year) => {
     {
       name: "সাদিয়া রায়হান",
       designation: "উপ-দপ্তর সম্পাদক",
-      image: "committee-members/2026/deputy-office-secretary/sadia.jpg",
+      image: "committee-members/2026/office-secretary/sadia.jpg",
     },
     {
       name: "আফরোজা তারিন মারজানা",
@@ -28,7 +28,7 @@ const OfficialsService = (year) => {
     {
       name: "মাইশা সিদ্দিকা",
       designation: "উপ-প্রচার সম্পাদক",
-      image: "committee-members/2026/deputy-press-secretary/mysha.jpg",
+      image: "committee-members/2026/press-secretary/mysha.jpg",
     },
     {
       name: "জুহাই-উর-আহমেদ শৌভিক",
@@ -38,7 +38,7 @@ const OfficialsService = (year) => {
     {
       name: "আবু আনাস মোহাম্মদ আলিফ",
       designation: "উপ-ক্রীড়া সম্পাদক",
-      image: "committee-members/2026/deputy-sports-secretary/anas.jpg",
+      image: "committee-members/2026/sports-secretary/anas.jpg",
     },
     {
       name: "রেজোয়ানা আফরোজ দিপা",
@@ -48,7 +48,7 @@ const OfficialsService = (year) => {
     {
       name: "নুসরাত জাহান নিশি",
       designation: "উপ-তথ্য ও প্রযুক্তি সম্পাদক",
-      image: "committee-members/2026/deputy-it-secretary/nishi.jpg",
+      image: "committee-members/2026/it-secretary/nishi.jpg",
     },
     {
       name: "কাজী নাদিয়া জাফরিন",
@@ -58,7 +58,7 @@ const OfficialsService = (year) => {
     {
       name: "অর্পিতা দাস",
       designation: "উপ-সাংস্কৃতিক সম্পাদক",
-      image: "committee-members/2026/deputy-cultural-secretary/arpita.jpg",
+      image: "committee-members/2026/cultural-secretary/arpita.jpg",
     },
   ];
 

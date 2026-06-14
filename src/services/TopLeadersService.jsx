@@ -8,7 +8,7 @@ const TopLeadersService = (year) => {
     {
       name: "মামশুকা ফারহাত",
       designation: "সিনিয়র সহ-সভাপতি",
-      image: "committee-members/2026/sr-vice-president/mumsuka.jpg",
+      image: "committee-members/2026/vice-president/mumsuka.jpg",
     },
     {
       name: "ফারহান নোশিন",
