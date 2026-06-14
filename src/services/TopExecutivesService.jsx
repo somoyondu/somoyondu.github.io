@@ -163,7 +163,61 @@ const TopExecutivesService = (year) => {
     },
   ];
 
+  const topExecutivesIn2026 = [
+    {
+      name: "মুশফিকুর রহমান মিজু",
+      designation: "সহ-সভাপতি",
+      image: "committee-members/2026/vice-president/mizu.jpg",
+    },
+    {
+      name: "মো. আসিফ হোসেন",
+      designation: "সহ-সভাপতি",
+      image: "committee-members/2026/vice-president/asif.jpg",
+    },
+    {
+      name: "সাকিব মাহমুদ বিজয়",
+      designation: "সহ-সভাপতি",
+      image: "committee-members/2026/vice-president/bijoy.jpg",
+    },
+    {
+      name: "সাফায়াতুল ইসলাম",
+      designation: "সহ-সভাপতি",
+      image: "committee-members/2026/vice-president/safayetul.jpg",
+    },
+    {
+      name: "মো. আমিনুল ইসলাম",
+      designation: "সহ-সভাপতি",
+      image: "committee-members/2026/vice-president/aminul.jpg",
+    },
+    {
+      name: "মো. আল-আমিন খান",
+      designation: "সহ-সভাপতি",
+      image: "committee-members/2026/vice-president/al-amin.jpg",
+    },
+    {
+      name: "তৌহিদুর রহমান তালুকদার",
+      designation: "যুগ্ম-সাধারণ সম্পাদক",
+      image: "committee-members/2026/joint-secretary/tawhidur.jpg",
+    },
+    {
+      name: "মো. সাব্বির হোসেন",
+      designation: "যুগ্ম-সাধারণ সম্পাদক",
+      image: "committee-members/2026/joint-secretary/sabbir.jpg",
+    },
+    {
+      name: "সাকিব ইহসান",
+      designation: "যুগ্ম-সাধারণ সম্পাদক",
+      image: "committee-members/2026/joint-secretary/sakib.jpg",
+    },
+    {
+      name: "প্রান্ত ঘোষ",
+      designation: "যুগ্ম-সাধারণ সম্পাদক",
+      image: "committee-members/2026/joint-secretary/pranto.jpg",
+    },
+  ];
+
   const topExecutivesByYearMap = {
+    2026: topExecutivesIn2026,
     2025: topExecutivesIn2025,
     2024: topExecutivesIn2024,
     2023: topExecutivesIn2023,

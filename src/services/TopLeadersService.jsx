@@ -67,7 +67,31 @@ const TopLeadersService = (year) => {
     },
   ];
 
+  const topLeadersIn2026 = [
+    {
+      name: "মোঃ নাজমুল",
+      designation: "সভাপতি",
+      image: "committee-members/2026/president/nazmul.jpg",
+    },
+    {
+      name: "মামশুকা ফারহাত",
+      designation: "সিনিয়র সহ-সভাপতি",
+      image: "committee-members/2026/sr-vice-president/mumsuka.jpg",
+    },
+    {
+      name: "ফারহান নোশিন",
+      designation: "সাধারণ সম্পাদক",
+      image: "committee-members/2026/general-secretary/farhan.jpg",
+    },
+    {
+      name: "মো. মাহমুদুল হাসান আবির",
+      designation: "সিনিয়র যুগ্ম-সাধারণ সম্পাদক",
+      image: "committee-members/2026/joint-secretary/mahamudul.jpg",
+    },
+  ];
+
   const topLeadersByYearMap = {
+    2026: topLeadersIn2026,
     2025: topLeadersIn2025,
     2024: topLeadersIn2024,
     2023: topLeadersIn2023,

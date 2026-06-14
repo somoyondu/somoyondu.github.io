@@ -134,7 +134,21 @@ const OrganizingExecutivesService = (year) => {
   ];
 
 
+  const organizingExecutivesIn2026 = [
+    {
+      name: "মোহাম্মদ শাহজালাল বারি",
+      designation: "সাংগঠনিক সম্পাদক",
+      image: "committee-members/2026/organizing-secretary/shahjalal.jpg",
+    },
+    {
+      name: "সিদ্ধার্থ বণিক",
+      designation: "সাংগঠনিক সম্পাদক",
+      image: "committee-members/2026/organizing-secretary/shiddhurtha.jpg",
+    },
+  ];
+
   const organizingExecutivesByYearMap = {
+    2026: organizingExecutivesIn2026,
     2025: organizingExecutivesIn2025,
     2024: organizingExecutivesIn2024,
     2023: organizingExecutivesIn2023,

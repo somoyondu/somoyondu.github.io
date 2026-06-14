@@ -337,7 +337,71 @@ const OfficialsService = (year) => {
     },
   ];
 
+  const officialsIn2026 = [
+    {
+      name: "আওয়াফ আনসারী",
+      designation: "কোষাধ্যক্ষ",
+      image: "committee-members/2026/treasurer/awof.jpg",
+    },
+    {
+      name: "শ্রেয়া শর্বজয়া",
+      designation: "উপ-কোষাধ্যক্ষ",
+      image: "committee-members/2026/deputy-treasurer/shreya.jpg",
+    },
+    {
+      name: "তাওয়াসুম",
+      designation: "দপ্তর সম্পাদক",
+      image: "committee-members/2026/office-secretary/tawasum.jpg",
+    },
+    {
+      name: "সাদিয়া রায়হান",
+      designation: "উপ-দপ্তর সম্পাদক",
+      image: "committee-members/2026/deputy-office-secretary/sadia.jpg",
+    },
+    {
+      name: "আফরোজা তারিন মারজানা",
+      designation: "প্রচার সম্পাদক",
+      image: "committee-members/2026/press-secretary/tareen.jpg",
+    },
+    {
+      name: "মাইশা সিদ্দিকা",
+      designation: "উপ-প্রচার সম্পাদক",
+      image: "committee-members/2026/deputy-press-secretary/mysha.jpg",
+    },
+    {
+      name: "জুহাই-উর-আহমেদ শৌভিক",
+      designation: "ক্রীড়া সম্পাদক",
+      image: "committee-members/2026/sports-secretary/shouvik.jpg",
+    },
+    {
+      name: "আবু আনাস মোহাম্মদ আলিফ",
+      designation: "উপ-ক্রীড়া সম্পাদক",
+      image: "committee-members/2026/deputy-sports-secretary/anas.jpg",
+    },
+    {
+      name: "রেজোয়ানা আফরোজ দিপা",
+      designation: "তথ্য ও প্রযুক্তি সম্পাদক",
+      image: "committee-members/2026/it-secretary/dipa.jpg",
+    },
+    {
+      name: "নুসরাত জাহান নিশি",
+      designation: "উপ-তথ্য ও প্রযুক্তি সম্পাদক",
+      image: "committee-members/2026/deputy-it-secretary/nishi.jpg",
+    },
+    {
+      name: "কাজী নাদিয়া জাফরিন",
+      designation: "সাংস্কৃতিক সম্পাদক",
+      image: "committee-members/2026/cultural-secretary/nadia.jpg",
+    },
+    {
+      name: "অর্পিতা দাস",
+      designation: "উপ-সাংস্কৃতিক সম্পাদক",
+      image: "committee-members/2026/deputy-cultural-secretary/arpita.jpg",
+    },
+  ];
+
   const officialsByYearMap = {
+    2026: officialsIn2026,
     2025: officialsIn2025,
     2024: officialsIn2024,
     2023: officialsIn2023,

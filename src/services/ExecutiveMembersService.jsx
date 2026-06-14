@@ -156,7 +156,56 @@ const ExecutiveMembersService = (year) => {
     },
   ];
 
+  const executiveMembersIn2026 = [
+    {
+      name: "নাঈম আহমেদ",
+      designation: "সাধারণ সদস্য",
+      image: "members/2026/nayeem.jpg",
+    },
+    {
+      name: "তাসনিম সুলতানা সিফা",
+      designation: "সাধারণ সদস্য",
+      image: "members/2026/sifa.jpg",
+    },
+    {
+      name: "ইসমাইল হোসেন",
+      designation: "সাধারণ সদস্য",
+      image: "members/2026/ismail.jpg",
+    },
+    {
+      name: "জয় চন্দ্র দাস",
+      designation: "সাধারণ সদস্য",
+      image: "members/2026/joy.jpg",
+    },
+    {
+      name: "মো. সালমান শরীফ তিশান",
+      designation: "সাধারণ সদস্য",
+      image: "members/2026/tishan.jpg",
+    },
+    {
+      name: "ফাহমিদ তাউসিফ ইসলাম",
+      designation: "সাধারণ সদস্য",
+      image: "members/2026/tauseef.jpg",
+    },
+    {
+      name: "ফরিদ উদ্দিন মাসুদ ফাহিম",
+      designation: "সাধারণ সদস্য",
+      image: "members/2026/fahim.jpg",
+    },
+    {
+      name: "আইশা আন নূর",
+      designation: "সাধারণ সদস্য",
+      image: "members/2026/aisha.jpg",
+    },
+    {
+      name: "শেখ মো. মোশফিকুর হোসাইন রাফি",
+      designation: "সাধারণ সদস্য",
+      image: "members/2026/rafi.jpg",
+    },
+  ];
+
   const executiveMembersByYearMap = {
+    2026: executiveMembersIn2026,
     2025: executiveMembersIn2025,
     2024: executiveMembersIn2024,
     2023: executiveMembersIn2023,
