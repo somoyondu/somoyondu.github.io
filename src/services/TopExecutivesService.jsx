@@ -31,7 +31,7 @@ const TopExecutivesService = (year) => {
       image: "committee-members/2026/vice-president/al-amin.jpg",
     },
     {
-      name: "তৌহিদুর রহমান তালুকদার",
+      name: "তাওহীদুর রহমান তালুকদার",
       designation: "যুগ্ম-সাধারণ সম্পাদক",
       image: "committee-members/2026/joint-secretary/tawhidur.jpg",
     },

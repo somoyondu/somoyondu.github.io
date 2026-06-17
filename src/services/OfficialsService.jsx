@@ -1,7 +1,7 @@
 const OfficialsService = (year) => {
   const officialsIn2026 = [
     {
-      name: "আওয়াফ আনসারী",
+      name: "আওফ আনছারী",
       designation: "কোষাধ্যক্ষ",
       image: "committee-members/2026/treasurer/awof.jpg",
     },
@@ -21,7 +21,7 @@ const OfficialsService = (year) => {
       image: "committee-members/2026/office-secretary/sadia.jpg",
     },
     {
-      name: "আফরোজা তারিন মারজানা",
+      name: "আফরোজা তারীন মারজানা",
       designation: "প্রচার সম্পাদক",
       image: "committee-members/2026/press-secretary/tareen.jpg",
     },
@@ -41,7 +41,7 @@ const OfficialsService = (year) => {
       image: "committee-members/2026/sports-secretary/anas.jpg",
     },
     {
-      name: "রেজোয়ানা আফরোজ দিপা",
+      name: "রিজওয়ানা আফরোজ দিপা",
       designation: "তথ্য ও প্রযুক্তি সম্পাদক",
       image: "committee-members/2026/it-secretary/dipa.jpg",
     },
