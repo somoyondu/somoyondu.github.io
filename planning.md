@@ -71,7 +71,7 @@ Version 1.0 · Owner: Md. Rakib Trofder · Last updated: 2026-08-15
 ### 2.1 Repository layout
 
 ```
-somoyondu.github.io   (existing)  → public site, Vite React SPA
+somoyondu.netlify.app  (existing)  → public site, Vite React SPA
 somoyon-api           (new)       → NestJS REST API
 somoyon-admin         (new)       → Vite React admin dashboard
 ```
@@ -84,8 +84,8 @@ somoyon-admin         (new)       → Vite React admin dashboard
 
 ```
                     ┌────────────────────────────┐
-   Visitors ───────▶│ somoyondu.github.io        │
-   (no login)       │ Vite React SPA · GH Pages  │
+   Visitors ───────▶│ somoyondu.netlify.app  │
+   (no login)       │ Vite React · Netlify  │
                     └─────────────┬──────────────┘
                                   │ GET /api/v1/public/*  (no auth, cached)
                                   ▼
@@ -125,7 +125,6 @@ All collections carry `createdAt`, `updatedAt`, `createdBy`, `updatedBy`.
   lastLoginAt?: Date,
   refreshTokenHash?: string,
   mustChangePassword: boolean,
-  twoFactorEnabled: boolean,       // phase 4
 }
 ```
 
@@ -339,7 +338,7 @@ src/
 - **Errors:** `AllExceptionsFilter` → consistent `{ success:false, error:{ code, message, details } }`.
 - **Docs:** `@nestjs/swagger` at `/api/docs` (basic-auth protected in production).
 - **Rate limiting:** `@nestjs/throttler` — 100 req/min public, 10 req/min on `/auth/login` and `/contact`.
-- **Security:** `helmet`, CORS allowlist (`somoyondu.github.io`, admin domain, `localhost:5173/5174`), `compression`.
+- **Security:** `helmet`, CORS allowlist (`somoyondu.netlify.app`, admin domain, `localhost:5173/5174`), `compression`.
 - **Logging:** `nestjs-pino` with request ids; ship to Better Stack / Axiom free tier.
 - **Health:** `@nestjs/terminus` at `/health` (Mongo ping + Cloudinary ping) — also keeps free-tier hosts warm.
 - **Caching:** `CacheModule` in-memory (TTL 5 min) on all `/public/*` GETs; bust the cache on any admin mutation via a `CacheBustService`. Add Redis (Upstash) only if you outgrow one instance.
@@ -500,7 +499,7 @@ Do not proceed to §8 until `verify` passes for all four years.
 
 ---
 
-## 8. Public Frontend Refactor (`somoyondu.github.io`)
+## 8. Public Frontend Refactor (`somoyondu.netlify.app`)
 
 ### 8.1 New dependencies
 ```
@@ -663,7 +662,7 @@ MONGODB_URI
 JWT_ACCESS_SECRET, JWT_ACCESS_TTL=15m
 JWT_REFRESH_SECRET, JWT_REFRESH_TTL=7d
 CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET
-CORS_ORIGINS=https://somoyondu.github.io,https://admin.somoyon.org
+CORS_ORIGINS=https://somoyondu.netlify.app,https://admin.somoyon.org
 THROTTLE_TTL, THROTTLE_LIMIT
 SMTP_HOST, SMTP_USER, SMTP_PASS, MAIL_FROM     # password reset + contact notify
 HCAPTCHA_SECRET
@@ -685,7 +684,7 @@ Estimates assume one developer working part-time.
 ### Phase 0 — Prep (3–5 days)
 - [ ] Create `somoyon-api` and `somoyon-admin` repos; scaffold Nest + Vite/TS
 - [ ] Provision Atlas cluster, Cloudinary account, hosting accounts
-- [ ] Clean `somoyondu.github.io`: remove `.DS_Store`, fix `.gitignore`, fix `deploy` script (`build` → `dist`), fix duplicate `id="executives"`
+- [ ] Clean `somoyondu.netlify.app`: remove `.DS_Store`, fix `.gitignore`, fix `deploy` script (`build` → `dist`), fix duplicate `id="executives"`
 - [ ] Add ESLint/Prettier/husky/commitlint to all three repos
 
 ### Phase 1 — API foundation (1–1.5 weeks)
@@ -792,3 +791,15 @@ Estimates assume one developer working part-time.
 2. Create the two new repos and provision Atlas + Cloudinary.
 3. Do the Phase 0 cleanup on this repo — it is independently valuable and low-risk.
 4. Write `seed/extract.ts` **first**: getting the legacy data into clean JSON de-risks everything downstream and can happen before a single API endpoint exists.
+
+
+#########
+Basically I want to upload my content e.g. members in committe every year,
+events, gallery albums, contact form etc
+For that we need to integrate nestjs, mongodb, cloudinary, and a frontend (public site is already implemented here but we also need admin panel and usual general site).
+We can use netlify + renderer to host the frontend and backend
+
+
+We will login via google3.0 auth only for admin email
+rest of the email is not able to login using google3.0 auth
+#########
