@@ -1,0 +1,27 @@
+name: Public site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run lint --if-present
+      - name: Build (snapshots API content into public/fallback.json)
+        env:
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+          VITE_SITE_URL: ${{ secrets.VITE_SITE_URL }}
+        run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist

@@ -1,28 +1,21 @@
-import React from 'react'
-import InfoCard from './InfoCard'
+import { useSettings } from '../../context/SettingsContext';
+import InfoCard from './InfoCard';
 
 const DonationCard = () => {
-  const donationMediums = [
-    {
-      image: 'rocket.png',
-      phoneNumber : '016114930633',
-    },
-    {
-      image: 'bkash.png',
-      phoneNumber : '01329600796',
-    },
-    {
-      image: 'nagad.png',
-      phoneNumber : '016114930633',
-    },
-  ]
-  return (
-    <div className='m-8 flex  flex-col lg:flex-row'>
-      {donationMediums.map((donationMedium)=>(
-       <InfoCard donationMedium={donationMedium}/>
-    ))}
-    </div>
-  )
-}
+  const { settings } = useSettings();
+  const methods = settings.donation?.methods ?? [];
 
-export default DonationCard
+  if (!methods.length) {
+    return <p className="my-6 text-center text-sm text-gray-500">পেমেন্ট তথ্য শীঘ্রই যোগ করা হবে</p>;
+  }
+
+  return (
+    <div className="m-8 flex flex-col lg:flex-row">
+      {methods.map((method) => (
+        <InfoCard key={`${method.name}-${method.number}`} method={method} />
+      ))}
+    </div>
+  );
+};
+
+export default DonationCard;

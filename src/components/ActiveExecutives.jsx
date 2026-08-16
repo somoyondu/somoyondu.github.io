@@ -1,16 +1,15 @@
-import ExecutiveMembers from "./Executives/ExecutiveMembers";
-import OfficialExecutives from "./Executives/OfficialExecutives";
-import OrganizingExecutives from "./Executives/OrganizingExecutives";
-import TopExecutives from "./Executives/TopExecutives";
-const ActiveExecutives = ({ selectedId, year }) => {
-  return (
-    <div>
-      {selectedId === "members" && <ExecutiveMembers year={year}/>}
-      {selectedId === "official" && <OfficialExecutives year={year}/>}
-      {selectedId === "organizing" && <OrganizingExecutives year={year}/>}
-      {selectedId === "top-executives" && <TopExecutives year={year}/>}
-    </div>
-  );
+import PositionGrid from './Executives/PositionGrid';
+
+const GROUP_BY_TAB = {
+  'top-executives': 'TOP_EXECUTIVE',
+  organizing: 'ORGANIZING',
+  official: 'OFFICIAL',
+  members: 'MEMBER',
+};
+
+const ActiveExecutives = ({ selectedId, groups = {} }) => {
+  const key = GROUP_BY_TAB[selectedId];
+  return <PositionGrid positions={groups[key] ?? []} />;
 };
 
 export default ActiveExecutives;

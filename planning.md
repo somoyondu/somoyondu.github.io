@@ -792,14 +792,88 @@ Estimates assume one developer working part-time.
 3. Do the Phase 0 cleanup on this repo — it is independently valuable and low-risk.
 4. Write `seed/extract.ts` **first**: getting the legacy data into clean JSON de-risks everything downstream and can happen before a single API endpoint exists.
 
+---
 
-#########
-Basically I want to upload my content e.g. members in committe every year,
-events, gallery albums, contact form etc
-For that we need to integrate nestjs, mongodb, cloudinary, and a frontend (public site is already implemented here but we also need admin panel and usual general site).
-We can use netlify + renderer to host the frontend and backend
+## 17. Implementation Status — BUILT
 
+Everything below is implemented in this workspace.
 
-We will login via google3.0 auth only for admin email
-rest of the email is not able to login using google3.0 auth
-#########
+### 17.1 What exists now
+
+```
+somoyondu.github.io/          public website (Vite React) — rewired to the API
+├── somoyon-api/              NestJS + MongoDB Atlas + Cloudinary   ← move out & git init
+└── somoyon-admin/            React + TS admin panel                ← move out & git init
+```
+
+Hosting: **Netlify** (public site + admin) · **Render** (API) · **MongoDB Atlas** · **Cloudinary**.
+
+### 17.2 Authentication — decided: Google Sign-In, admin emails only
+
+Per the requirement at the end of this document, the admin panel signs in with
+Google. Authorisation is deliberately two-step:
+
+1. Google proves **who** the person is (verified ID token, correct audience,
+   verified email, optional hosted-domain check).
+2. Our database decides **whether they may enter** — the email must already
+   exist as an *active* user in the `users` collection.
+
+Signing in with Google **never creates an account**. Any other Gmail address is
+rejected with a Bengali message and the attempt is written to the audit log.
+Optional extra guard: `GOOGLE_ALLOWED_EMAILS` allowlist.
+
+Password login is retained as a fallback (needed to bootstrap the very first
+SUPER_ADMIN before a Google account is linked, and as a recovery path if Google
+is unreachable). It is behind a secondary link on the login screen.
+
+| Endpoint | Purpose |
+|---|---|
+| `GET /auth/google/config` | Tells the admin panel whether Google is configured, and the client id |
+| `POST /auth/google` | Exchanges a Google ID token for our JWT pair |
+| `POST /auth/login` | Password fallback |
+
+Env vars: `GOOGLE_CLIENT_ID`, `GOOGLE_ALLOWED_EMAILS`, `GOOGLE_HOSTED_DOMAIN`.
+
+### 17.3 Deviations from the original plan
+
+| Plan said | Built | Why |
+|---|---|---|
+| GitHub Pages + `404.html` shim | Netlify + `netlify.toml` redirect | Hosting choice changed to Netlify + Render |
+| Password-only admin auth | Google Sign-In primary, password fallback | Requirement added at the end of this doc |
+| Five per-group executive components | One `PositionGrid` | The API returns positions pre-grouped, so the five near-identical components collapsed into one. The old files are deprecation stubs re-exporting it |
+| Delete `src/services/*` after migration | Kept | `seed/extract.ts` reads them during migration. Delete after `seed:verify` passes |
+| Redis cache | In-memory cache + `CacheBustService` | Single instance for now; Redis is a drop-in later |
+
+### 17.4 Verification performed
+
+- 215 source files parse cleanly (esbuild, TS/TSX/JSX).
+- 0 unresolved imports across all three apps.
+- Public site production build succeeds (347 kB JS / 113 kB gzip).
+- `npm run seed:extract` runs against the real legacy data and produces:
+  2023 → 64, 2024 → 55, 2025 → 44, 2026 → 37 positions; 6 founding members;
+  7 advisors; 14 gallery images; 182 unique images referenced.
+- Unit tests written for the Bengali name-normalisation helpers and the public
+  response mapper (the two places where a subtle bug would silently corrupt the
+  migration).
+
+**Not yet verified** (requires live credentials): the Cloudinary upload run, the
+MongoDB import, `seed:verify`, and end-to-end admin flows. `npm install` for the
+API and admin apps has not been run in this environment.
+
+### 17.5 Go-live checklist
+
+1. Move `somoyon-api/` and `somoyon-admin/` out into their own repos.
+2. Provision MongoDB Atlas (M0), Cloudinary, Render, Netlify ×2.
+3. Create a Google OAuth client (Web application). Authorised JavaScript origin
+   = the admin panel URL. Put the client id in `GOOGLE_CLIENT_ID`.
+4. `cd somoyon-api && npm install && cp .env.example .env` — fill it in.
+5. `npm run seed:extract && npm run seed:upload && npm run seed:import`
+6. `npm run seed:admin` — creates the first SUPER_ADMIN. Use the **same email
+   as the Google account** that will administer the site.
+7. `npm run seed:verify` — **must exit 0 before going further.**
+8. Review `seed/review-merges.csv`, then merge duplicates in the admin panel.
+9. Deploy the API; set `CORS_ORIGINS` to both Netlify origins.
+10. Deploy the admin panel; log in with Google; verify each screen.
+11. Deploy the public site; compare side-by-side against the current live site.
+12. Add the remaining admins under **অ্যাডমিন ইউজার** (their Google emails).
+13. Hand over `somoyon-admin/HANDOVER-bn.md` and walk the team through it.

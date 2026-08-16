@@ -1,74 +1,62 @@
-import ImageSlider from "../components/ImageSlider";
-import { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
+import { useGallery } from '../api/queries';
+import ImageSlider from '../components/ImageSlider';
+import { Skeleton, SectionError } from '../components/Skeleton';
+import { useSettings } from '../context/SettingsContext';
+
+const containerStyles = {
+  width: '500px',
+  maxWidth: '100%',
+  height: '500px',
+  margin: '0 auto',
+};
 
 const Gallery = () => {
-  const [slides, setSlides] = useState([]);
-  
-  useEffect(() => {
-    // Dynamically import all images from the gallery folder using Vite's import.meta.glob
-    const importAllImages = async () => {
-      try {
-        // Get all images from the gallery folder using Vite's glob import
-        const imageModules = import.meta.glob('../../public/gallery/*.{jpg,jpeg,png,gif,webp}');
-        
-        const loadedSlides = await Promise.all(
-          Object.entries(imageModules).map(async ([path, module]) => {
-            // Extract filename without extension
-            const fileName = path
-              .split('/').pop() // Get the last part of the path
-              .replace(/\.[^/.]+$/, ''); // Remove file extension
-            
-            // Convert kebab-case or snake_case to Title Case
-            const title = fileName
-              .split(/[-_]/)
-              .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-              .join(' ');
-            
-            const imageUrl = (await module()).default;
-            
-            return {
-              url: imageUrl,
-              title: title,
-              key: fileName
-            };
-          })
-        );
-        
-        setSlides(loadedSlides);
-      } catch (error) {
-        console.error("Error loading images:", error);
-      }
-    };
-    
-    importAllImages();
-  }, []);
-
-  const containerStyles = {
-    width: "500px",
-    maxWidth: "100%",
-    height: "500px",
-    margin: "0 auto",
-  };
+  const { settings } = useSettings();
+  const { data, isLoading, isError, refetch } = useGallery(30);
 
   return (
     <div className="bg-[#FFF3CF] py-6 my-6" id="gallery">
       <div className="text-center">
-        <h1 className="text-2xl lg:text-4xl text-center font-bold pb-4 pt-6 text-[#1D0061]">
-          গ্যালারি
-        </h1>
-        <h1 className="text-xl mb-6">একনজরে সময়নের কার্যক্রম</h1>
+        <h2 className="text-2xl lg:text-4xl text-center font-bold pb-4 pt-6 text-[#1D0061]">
+          {settings.galleryBlurb?.title ?? 'গ্যালারি'}
+        </h2>
+        <p className="text-xl mb-6">{settings.galleryBlurb?.subtitle}</p>
 
-        {slides.length > 0 ? (
+        {isLoading && (
           <div style={containerStyles}>
-            <ImageSlider>
-              {slides.map((image) => (
-                <img key={image.key} src={image.url} alt={image.title} />
-              ))}
-            </ImageSlider>
+            <Skeleton className="h-full w-full" />
           </div>
-        ) : (
-          <p className="text-center py-4">ছবি লোড হচ্ছে ...</p>
         )}
+
+        {isError && <SectionError message="গ্যালারি লোড করা যায়নি" onRetry={refetch} />}
+
+        {!isLoading && !isError && (data?.length ? (
+          <>
+            <div style={containerStyles}>
+              <ImageSlider>
+                {data.map((image) => (
+                  <img
+                    key={image.key ?? image.id}
+                    src={image.url}
+                    alt={image.title}
+                    loading="lazy"
+                    decoding="async"
+                    style={{ backgroundImage: `url(${image.placeholder ?? ''})`, backgroundSize: 'cover' }}
+                  />
+                ))}
+              </ImageSlider>
+            </div>
+            <Link
+              to="/gallery"
+              className="mt-6 inline-block rounded-md bg-[#1D0061] px-6 py-2 text-white lg:px-10 lg:py-3"
+            >
+              সব অ্যালবাম দেখুন
+            </Link>
+          </>
+        ) : (
+          <p className="py-4 text-center">এখনো কোনো ছবি যোগ করা হয়নি</p>
+        ))}
       </div>
     </div>
   );

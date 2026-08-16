@@ -1,15 +1,14 @@
-import ExecutiveCard from "../ExecutiveCard";
-import FoundingMembersService from '../../services/FoundingMembersService';
+import { useFoundingMembers } from '../../api/queries';
+import { CardSkeletonGrid, SectionError } from '../Skeleton';
+import PositionGrid from './PositionGrid';
 
 const FoundingLeaders = () => {
-    const foundingLeaders = FoundingMembersService();
+  const { data, isLoading, isError, refetch } = useFoundingMembers();
 
-  return (
-    <div className="mx-6 lg:mx-20 mt-5 lg:mt-10 grid gap-1 lg:gap-4 grid-cols-2 lg:grid-cols-4">
-    {foundingLeaders.map((foundingLeader) => (
-      <ExecutiveCard key={foundingLeader.name} executive={foundingLeader} />
-    ))}
-  </div>  )
-}
+  if (isLoading) return <CardSkeletonGrid count={6} />;
+  if (isError) return <SectionError message="প্রতিষ্ঠাতা সদস্যদের তথ্য লোড করা যায়নি" onRetry={refetch} />;
+
+  return <PositionGrid positions={data ?? []} />;
+};
 
 export default FoundingLeaders;

@@ -1,0 +1,30 @@
+name: Scheduled maintenance
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'   # keep the free-tier instance warm
+    - cron: '0 2 * * *'      # nightly MongoDB backup
+  workflow_dispatch:
+
+jobs:
+  keep-warm:
+    if: github.event.schedule == '*/10 * * * *'
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -fsS "${{ secrets.API_URL }}/health/ping" || echo "ping failed"
+
+  backup:
+    if: github.event.schedule == '0 2 * * *'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install mongodb-database-tools
+        run: |
+          wget -qO- https://fastdl.mongodb.org/tools/db/mongodb-database-tools-ubuntu2204-x86_64-100.9.4.tgz | tar xz
+          echo "$PWD/mongodb-database-tools-ubuntu2204-x86_64-100.9.4/bin" >> $GITHUB_PATH
+      - name: Dump database
+        run: mongodump --uri="${{ secrets.MONGODB_URI }}" --archive=backup.gz --gzip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mongo-backup-${{ github.run_id }}
+          path: backup.gz
+          retention-days: 30

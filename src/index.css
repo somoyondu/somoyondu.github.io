@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Hind Siliguri', 'Noto Sans Bengali', system-ui, -apple-system, sans-serif;
+  }
+  body {
+    @apply bg-white text-gray-900;
+  }
+  /* Reserve space so slow images do not shift the layout. */
+  img {
+    @apply max-w-full;
+  }
+}
+
+@layer utilities {
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .prose :where(h2) { @apply mt-6 mb-2 text-2xl font-bold text-[#1D0061]; }
+  .prose :where(h3) { @apply mt-4 mb-2 text-xl font-semibold; }
+  .prose :where(p) { @apply my-3 leading-relaxed; }
+  .prose :where(ul) { @apply my-3 list-disc pl-6; }
+  .prose :where(ol) { @apply my-3 list-decimal pl-6; }
+  .prose :where(a) { @apply text-[#6251A7] underline; }
+  .prose :where(img) { @apply my-4 rounded-lg; }
+  .prose :where(blockquote) { @apply my-4 border-l-4 border-[#CBBEFF] pl-4 italic text-gray-600; }
+}

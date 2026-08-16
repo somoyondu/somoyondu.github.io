@@ -1,15 +1,15 @@
-import BottomSection from '../layouts/BottomSection'
-import MainSection from '../layouts/MainSection'
-import TopSection from '../layouts/TopSection'
+import Seo from '../components/Seo';
+import BottomSection from '../layouts/BottomSection';
+import MainSection from '../layouts/MainSection';
+import TopSection from '../layouts/TopSection';
 
-const LandingPage = () => {
-  return (
-    <div>
-        <TopSection/>
-        <MainSection/>
-        <BottomSection/>
-    </div>
-  )
-}
+const LandingPage = () => (
+  <>
+    <Seo path="/" />
+    <TopSection />
+    <MainSection />
+    <BottomSection />
+  </>
+);
 
-export default LandingPage
+export default LandingPage;

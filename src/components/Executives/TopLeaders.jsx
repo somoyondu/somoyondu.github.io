@@ -1,15 +1,7 @@
-import ExecutiveCard from "../ExecutiveCard";
-import TopLeadersService from '../../services/TopLeadersService';
-
-const TopLeaders = ({year}) => {
-  const topLeaders = TopLeadersService(year);
-  return (
-    <div className="mx-6 lg:mx-20 mt-5 lg:mt-10 grid gap-1 lg:gap-4 grid-cols-2 lg:grid-cols-4">
-      {topLeaders.map((topLeader) => (
-        <ExecutiveCard key={topLeader.name} executive={topLeader} />
-      ))}
-    </div>
-  );
-};
-
-export default TopLeaders;
+/**
+ * DEPRECATED — replaced by ./PositionGrid.jsx.
+ *
+ * Group data now arrives from the API already grouped, so the five
+ * near-identical components collapsed into one. Safe to delete this file.
+ */
+export { default } from './PositionGrid';
